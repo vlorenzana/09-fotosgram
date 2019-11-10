@@ -10,25 +10,31 @@ import { eventMethod } from '@ionic/core/dist/types/utils/overlays';
 export class Tab1Page implements OnInit {
 
   posts  = [];
+  habilitado = false;
+
   constructor(private postService: PostService) {}
   ngOnInit() {
-    this.carga();
+    this.siguientes();
   }
-  siguientes(event) {
-    this.carga();
-  }
-  carga(event?) {
-    this.postService.getPosts().subscribe(
+  siguientes( event? , pull: boolean = false ) {
+    this.postService.getPosts( pull ).subscribe(
       resp => {
         console.log(resp);
-        this.posts.push(...resp.post);
+        const temp = this.posts;
+        temp.push(...resp.post);
+        this.posts = temp;
         if (event) {
             event.target.complete();
-        }
-        if(resp.post.length === 0) {
-          event.target.disabled = true;
+            if ( resp.post.length === 0) {
+              event.target.disabled = true;
+              this.habilitado = true;
+              console.log('refresh habilitado');
+            }
         }
       }
     );
+  }
+  doRefresh( event ) {
+    this.siguientes(event, true);
   }
 }

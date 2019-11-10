@@ -11,7 +11,10 @@ export class PostService {
   url = environment.url;
   paginaPost = 0;
   constructor(private http: HttpClient) { }
-  getPosts() {
+  getPosts(pull: boolean = false) {
+    if ( pull ) {
+      this.paginaPost = 0;
+    }
     this.paginaPost++;
     return this.http.get<RespuestaPosts>(`${ this.url }/post?pagina=${this.paginaPost}`);
   }

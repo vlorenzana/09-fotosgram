@@ -1,25 +1,38 @@
 <ion-header no-border>
   <ion-toolbar>
-   <ion-buttons slot="start">
-     <ion-button (click)="onClick()">
-       <ion-icon slot="icon-only" name="bonfire"></ion-icon>
-       </ion-button>
-   </ion-buttons>
-   <ion-title>Fotosgram</ion-title>
+    <ion-buttons slot="start">
+      <ion-button (click)="onClick()">
+        <ion-icon slot="icon-only" name="bonfire"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Fotosgram</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content color="light">
   <!-- refeser-->
+  <ion-refresher
+    slot="fixed"
+    [disabled]="!habilitado"
+    (ionRefresh)="doRefresh($event)"
+  >
+    <ion-refresher-content
+      pullingIcon="arrow-dropdown"
+      pullingText="Pull to refresh"
+      refreshingSpinner="circles"
+      refreshingText="Refreshing..."
+    >
+    </ion-refresher-content>
+  </ion-refresher>
   <!-- post -->
-<app-posts [posts]="posts"></app-posts>
+  <app-posts [posts]="posts"></app-posts>
   <!-- infinite scroll -->
 
   <ion-infinite-scroll threshold="100px" (ionInfinite)="siguientes($event)">
-      <ion-infinite-scroll-content
-        loadingSpinner="bubbles"
-        loadingText="Loading more data...">
-      </ion-infinite-scroll-content>
-    </ion-infinite-scroll>
-
+    <ion-infinite-scroll-content
+      loadingSpinner="bubbles"
+      loadingText="Loading more data..."
+    >
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 </ion-content>
