@@ -1,3 +1,37 @@
-<p>
-  post works!
-</p>
+<div class="post">
+  <ion-item lines="none">
+    <ion-avatar>
+      <img src="/assets/avatars/{{ post.usuario.avatar }}" />
+    </ion-avatar>
+    <ion-label>
+      <h3>
+        {{post.usuario.nombre}}
+      </h3>
+      <h5> {{post.usuario.email}}</h5>
+    </ion-label>
+  </ion-item>
+  <ion-slides pager="true">
+    <ion-slide class="image-slide" [style]=" img1 | domzanitizerPipe">
+     
+    </ion-slide> 
+    <ion-slide class="image-slide" [style]=" img2 | domzanitizerPipe">
+     
+      </ion-slide> 
+      <ion-slide class="image-slide" [style]=" img2 | domzanitizerPipe">
+     
+        </ion-slide>    
+  </ion-slides>
+
+  <!-- mapa -->
+
+  <ion-item lines="none">
+    <ion-icon slot="start" name="heart-empty"></ion-icon>
+    <ion-icon slot="end" name="bookmark"></ion-icon>
+  </ion-item>
+
+  <ion-item>
+    <ion-label class="ion-text-wrap">
+      {{post.mensaje}}
+    </ion-label>
+  </ion-item>
+</div>
